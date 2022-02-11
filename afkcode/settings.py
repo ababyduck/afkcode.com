@@ -61,7 +61,7 @@ ROOT_URLCONF = 'afkcode.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['afkcode/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
