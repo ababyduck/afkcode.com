@@ -15,6 +15,7 @@ import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
+from afkcode.secrets import db_info
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,11 +91,15 @@ if DEVELOPMENT_MODE is True:
         }
     }
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-    if os.getenv('DATABASE_URL', None) is None:
-        raise Exception('DATABASE_URL environment variable not defined')
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': db_info
     }
+    # May use the following in the future for deploying to DigitalOcean App Platform
+    # if os.getenv('DATABASE_URL', None) is None:
+    #     raise Exception('DATABASE_URL environment variable not defined')
+    # DATABASES = {
+    #     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    # }
 
 
 # Password validation
