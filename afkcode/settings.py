@@ -28,11 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 DEBUG = True
 
 # Will use this to determine which db to use
-# DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', 'False') == 'True'
 DEVELOPMENT_MODE = True
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
@@ -94,12 +92,6 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     DATABASES = {
         'default': prod_db_info
     }
-    # May use the following in the future for deploying to DigitalOcean App Platform
-    # if os.getenv('DATABASE_URL', None) is None:
-    #     raise Exception('DATABASE_URL environment variable not defined')
-    # DATABASES = {
-    #     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    # }
 
 
 # Password validation
@@ -123,23 +115,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = 'afkcode/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'deployment/static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'deployment/media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
