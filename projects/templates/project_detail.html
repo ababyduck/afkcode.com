@@ -12,7 +12,11 @@
         <p>{{ project.description }}</p>
         <br>
         <h5>Technology used:</h5>
-        <p>{{ project.technology }}</p>
+        <p>
+            {% for category in project.categories.all %}
+                <a href="#">{{ category.name }}</a> &nbsp;
+            {% endfor %}
+        </p>
     </div>
 </div>
 {% endblock %}

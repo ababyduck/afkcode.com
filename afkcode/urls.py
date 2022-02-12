@@ -24,4 +24,5 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('courses/', include('courses.urls')),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('', TemplateView.as_view(template_name='about.html'), name='about')
 ]
