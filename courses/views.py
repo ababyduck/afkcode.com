@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from courses.models import School, Course
+from courses.models import Course
 
 
 def course_index(request):
@@ -10,7 +10,7 @@ def course_index(request):
     return render(request, 'course_index.html', context)
 
 
-def course_detail(request, pk):
+def course_detail(request, slug, pk):
     course = Course.objects.get(pk=pk)
     context = {
         'course': course
