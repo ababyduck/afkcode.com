@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import sys
 import dj_database_url
-import django_heroku
+# import django_heroku
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 
@@ -153,4 +153,4 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configure Django App for Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
