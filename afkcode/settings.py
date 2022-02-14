@@ -15,9 +15,15 @@ import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
-from afkcode.secrets import admins, set_environment_variables
 
-set_environment_variables()
+# Try to set local environment variables
+# In production this is handled by dokku so we don't care if it fails
+try:
+    from afkcode.secrets import admins, set_environment_variables
+    set_environment_variables()
+    ADMINS = admins
+except ModuleNotFoundError:
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +38,6 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
-ADMINS = admins
 
 # Will use this to determine which db to use
 DEVELOPMENT = os.getenv("DJANGO_DEVELOPMENT", "False") == "True"
