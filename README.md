@@ -27,13 +27,17 @@ Initially I followed [this excellent tutorial by Jasmine Finer](https://realpyth
 I was hesitant to embrace Bootstrap's class library because it feels like giving up some design control to learn another framework that I don't *need*, but it's hard to argue with the value of time saved creating a responsive page that looks familiar to users, especially on a school assignment deadline. 
 
 ### PostgreSQL
-Django's ORM handles the queries, but I had to install and configure the database first. While I *could* write the SQL myself, I'm actually looking forward to a more maintainable project that doesn't have stringified queries in it.  Also a huge benefit if I ever want to change database servers in the future.  (Eventually I started using Dokku, which automates most of the database setup. More on that below.)
+Django's ORM handles the queries, but I had to install and configure the database first. (While I *could* write the SQL myself, I'm actually looking forward to a more maintainable project without a bunch of stringified queries, which is also a huge benefit if I ever want to change database servers in the future.)  I did eventually start using Dokku, which automates most of the database setup. More on that below.
 
 ### DigitalOcean
 Droplets are awesome. $5/month to host my Django app is hard to pass up, especially when [GitHub's student developer pack](https://education.github.com/pack) comes with a $100 DigitalOcean credit that should cover this site for most of my undergrad.  DigitalOcean's "App Platform" is another very compelling deployment option since it can link directly to GitHub or Gitlab and update itself whenever you push new changes, but unfortunately they want an additional $7/month just to host your database if you go this route. (More on git deployment in the next heading.)
 
 ### Dokku / Heroku commands
-[Dokku](https://dokku.com/) is a PaaS service that is very similar to [Heroku](https://www.heroku.com/), except that it's self-hosted.  By installing Dokku on a cheap droplet, we gain the convenience of Heroku's time-saving deployment features without the high price tag. Dokku handles configuring a few things for us and exposes a nice API for others, including: deploying directly from a remote git repo to a [Docker](https://www.docker.com/) container, automatically configuring [nginx](https://www.nginx.com/) to reverse proxy to [gunicorn](https://gunicorn.org/), managing SSL certificates, and managing project-specific environment variables.
+[Dokku](https://dokku.com/) is a PaaS service that is very similar to [Heroku](https://www.heroku.com/), except that it's self-hosted.  By installing Dokku on a cheap droplet, we gain the convenience of Heroku's time-saving deployment features without the high price tag. Dokku handles configuring a few things for us and exposes a nice API for others, including:
+- Building directly from a remote git repo to a [Docker](https://www.docker.com/) container
+- Automatically configuring [nginx](https://www.nginx.com/) with a reverse proxy to [gunicorn](https://gunicorn.org/)
+- Managing project-specific environment variables
+- Managing SSL certs, including a cron job for auto-renewal ([requires a plugin](https://github.com/dokku/dokku-letsencrypt))
 
 ### CloudFlare
 Pointing my domain registrar to CloudFlare's nameservers provides a nicer interface for managing DNS records and an easy-to-use proxy server with lots of additional functionality including caching, DDoS protection, and some basic monitoring that lets me easily see if my webserver's returning any error codes on incoming traffic.
