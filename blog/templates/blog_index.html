@@ -12,6 +12,8 @@
         {% endfor %}
     </small>
     <p>{{ post.body | slice:':400' }}...</p>
+    {% empty %}
+        <p>Nothing to display.</p>
     {% endfor %}
 </div>
 {% endblock %}

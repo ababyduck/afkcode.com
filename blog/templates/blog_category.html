@@ -4,7 +4,7 @@
     <h1>{{ category | title }}</h1>
     <hr>
     {% for post in posts %}
-    <h2><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></h2>
+    <h2><a href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">{{ post.title }}</a></h2>
     <small>
         {{ post.created_on.date }} |&nbsp; Categories: &nbsp;
         {% for category in post.categories.all %}
