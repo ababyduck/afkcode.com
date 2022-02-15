@@ -1,7 +1,7 @@
 # afkcode.com
 This project will contain my personal portfolio website, which is primarily intended for school projects for now.
 
-## Goals
+## Project Goals
 - [x] Create a self-contained portfolio website using [Django](https://www.djangoproject.com/) that can be easily deployed to an inexpensive VPS
 - [ ] Showcase projects from each of my classes as I progress through my [Computer Science undergrad at CSUMB](https://csumb.edu/csonline/).
 - [ ] Migrate my existing Learning Journal content from Blogger and post all future content on this new project
@@ -9,10 +9,10 @@ This project will contain my personal portfolio website, which is primarily inte
 ## Tech Stack
 - Services: 
   - CloudFlare nameservers and proxy
-  - LetsEncrypt SSL cert
   - DigitalOcean Droplet (Ubuntu VPS)
-  - Dokku-managed container
-- Web servers: nginx handles static data, reverse proxies the rest to gunicorn
+  - Dokku-managed Docker container
+  - LetsEncrypt SSL cert
+- Web server: nginx reverse proxy to gunicorn
 - Databases: SQLite for local development, PostgreSQL for production
 - Frameworks: Django 4, Bootstrap 5
 - Languages: Python, HTML, CSS
@@ -41,3 +41,12 @@ Droplets are awesome. $5/month to host my Django app is hard to pass up, especia
 
 ### CloudFlare
 Pointing my domain registrar to CloudFlare's nameservers provides a nicer interface for managing DNS records and an easy-to-use proxy server with lots of additional functionality including caching, DDoS protection, and some basic monitoring that lets me easily see if my webserver's returning any error codes on incoming traffic.
+
+### Infrastructure is hard
+I spent almost 4 days just getting static images to work in production.  I tore my hair out and nearly swore off Django because of how frustrating the deployment process was initially, but fixing it forced me to learn a lot about every layer of the tech stack that I'm using.
+
+The solution I settled on involves adding the [whitenoise](http://whitenoise.evans.io/en/stable/) module to my Django config to allow it to serve static files directly to the gunicorn webserver from inside the container. The whitenoise docs have a nice writeup on [why this is actually a preferable solution to something like S3](http://whitenoise.evans.io/en/stable/#shouldn-t-i-be-pushing-my-static-files-to-s3-using-something-like-django-storages). The other option would have been to write an nginx [sigil template](https://dokku.com/docs/configuration/nginx/#customizing-the-nginx-configuration) and then add a post-build script to copy all of my files outside of the container so that nginx can serve them directly.
+
+## Recommendations
+
+To anyone looking to tackle a similar project, [this is the tutorial I wish I had when I started the deployment process](https://www.accordbox.com/blog/how-deploy-django-project-dokku/). It's not super in-depth, but there are so many pearls of knowledge here that each took me quite a bit of time to find by digging through documentation and stackoverflow searches.
