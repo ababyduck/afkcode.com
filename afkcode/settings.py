@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import sys
 import dj_database_url
-# import django_heroku
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 
@@ -83,7 +82,7 @@ MIDDLEWARE = [
 ]
 # Compression support
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'afkcode.urls'
 
@@ -153,6 +152,3 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Configure Django App for Heroku.
-# django_heroku.settings(locals())
