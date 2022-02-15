@@ -21,7 +21,8 @@ class Course(models.Model):
     description = models.TextField(null=True, blank=True)
     school = models.ForeignKey('School', on_delete=models.PROTECT)
     categories = models.ManyToManyField('blog.Category')
-    completed = models.BooleanField()
+    in_progress = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
     slug = models.SlugField(default='', editable=False, max_length=25, null=False)
 
     def __str__(self):
