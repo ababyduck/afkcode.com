@@ -10,7 +10,7 @@
             <img class="card-img-top" src="{% get_media_prefix %}{{ project.image.name }}">
             <div class="card-body">
                 <h5 class="card-title">{{ project.title }}</h5>
-                <p class="card-text">{{ project.description|safe }}</p>
+                <p class="card-text">{{ project.description | safe }}</p>
                 <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary">
                     Read More
                 </a>
