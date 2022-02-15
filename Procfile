@@ -1,3 +1,3 @@
 web: gunicorn afkcode.wsgi
 
-release: django-admin migrate --clear --noinput
+release: django-admin migrate --noinput
