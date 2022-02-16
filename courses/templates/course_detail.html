@@ -11,13 +11,14 @@
     {% elif course.in_progress %}
         <p>In Progress</p>
     {% endif %}
-    <p>Description: {{ course.description | safe | linebreaks }}</p>
-    <p>Associated projects:</p>
-{% comment %}
+    <h2>Description:</h2>
+    <p>{{ course.description | safe | linebreaks }}</p>
+
+    <h2>Associated projects:</h2>
+
     {% for project in projects %}
-        {{ project.name }}
+        <a href="{% url 'project_detail' project.pk project.slug %}">{{ project.title }}</a>
     {% endfor %}
-{% endcomment %}
 
 </div>
 {% endblock %}

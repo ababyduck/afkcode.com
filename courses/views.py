@@ -13,9 +13,9 @@ def course_index(request):
 
 def course_detail(request, slug, pk):
     course = Course.objects.get(pk=pk)
-    # projects = Project.objects.get(course=course)
+    projects = Project.objects.filter(course=course)
     context = {
         'course': course,
-        # 'projects': projects
+        'projects': projects
     }
     return render(request, 'course_detail.html', context)
