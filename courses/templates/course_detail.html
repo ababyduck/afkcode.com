@@ -2,5 +2,22 @@
 {% load static %}
 
 {% block page_content %}
-<h1>Some course</h1>
+<div>
+    <h1>{{ course.subject }} {{ course.code }} - {{ course.name }}</h1>
+    <p>School: <a href="{{ course.school.website }}">{{ course.school.name }}</a></p>
+    <p>Units: {{ course.units }}</p>
+    {% if course.completed %}
+        <p>Completed</p>
+    {% elif course.in_progress %}
+        <p>In Progress</p>
+    {% endif %}
+    <p>Description: {{ course.description | safe | linebreaks }}</p>
+    <p>Associated projects:</p>
+{% comment %}
+    {% for project in projects %}
+        {{ project.name }}
+    {% endfor %}
+{% endcomment %}
+
+</div>
 {% endblock %}
