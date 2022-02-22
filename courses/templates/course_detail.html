@@ -22,9 +22,13 @@
 
     <h2>Associated projects:</h2>
 
-    {% for project in projects %}
-        <a href="{% url 'project_detail' project.pk project.slug %}">{{ project.title }}</a>
-    {% endfor %}
+    <ul class="list-inline">
+        {% for project in projects %}
+            <li class="list-inline-item">
+                <a href="{% url 'project_detail' project.pk project.slug %}">{{ project.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 
 </div>
 {% endblock %}

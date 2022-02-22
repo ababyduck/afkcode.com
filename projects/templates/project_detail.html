@@ -12,11 +12,13 @@
         <p>{{ project.description | safe | linebreaks }}</p>
         <br>
         <h5>Categories:</h5>
-        <p>
-            {% for category in project.categories.all %}
+        <ul class="list-inline">
+        {% for category in project.categories.all %}
+            <li class="list-inline-item">
                 <a href="#">{{ category.name }}</a> &nbsp;
-            {% endfor %}
-        </p>
+            </li>
+        {% endfor %}
+        </ul>
     </div>
 </div>
 {% endblock %}
