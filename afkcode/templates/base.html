@@ -6,7 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>afkcode.com</title>
+    <title>{% block title %}{{ page_title|default:"afkcode.com" }}{% endblock title %}</title>
+
     <meta name="description" content="afkcode.com is one student's personal portfolio and blog">
     <meta name="keywords" content="csumb, cs online, computer science, portfolio, projects, writing, programming, code, ilp, learning plan, undergrad, bachelors, bs">
 
