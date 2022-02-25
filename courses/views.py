@@ -6,11 +6,11 @@ from projects.models import Project
 def course_index(request):
     courses_in_progress = Course.objects.filter(in_progress=True).order_by('school', 'subject', 'code')
     courses_completed = Course.objects.filter(completed=True).order_by('school', 'subject', 'code')
-    courses_other = Course.objects.filter(in_progress=False, completed=False).order_by('school', 'subject', 'code')
+    courses_planned = Course.objects.filter(in_progress=False, completed=False).order_by('school', 'subject', 'code')
     context = {
         'courses_in_progress': courses_in_progress,
         'courses_completed': courses_completed,
-        'courses_other': courses_other
+        'courses_planned': courses_planned
     }
     return render(request, 'course_index.html', context)
 
