@@ -6,7 +6,9 @@
 {% block page_content %}
 <h1>Courses</h1>
 <div class="row">
-    {% for course in courses %}
+
+    <h2>In Progress</h2>
+    {% for course in courses_in_progress %}
     <div class="col-md-4">
         <div class="card mb-2">
             <div class="card-body">
@@ -21,5 +23,40 @@
     {% empty %}
         <p>Nothing to display.</p>
     {% endfor %}
+
+    <h2>Completed</h2>
+    {% for course in courses_completed %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
+                <p class="card-text">{{ course.name }}</p>
+                <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
+                    Read More
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p>Nothing to display.</p>
+    {% endfor %}
+
+    <h2>Planned</h2>
+    {% for course in courses_other %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
+                <p class="card-text">{{ course.name }}</p>
+                <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
+                    Read More
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p>Nothing to display.</p>
+    {% endfor %}
+
 </div>
 {% endblock %}
