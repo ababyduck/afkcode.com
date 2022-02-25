@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'projects',
     'blog',
     'courses',
+    'django_minify_html'
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_minify_html.middleware.MinifyHtmlMiddleware'
 ]
 # Compression support
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
