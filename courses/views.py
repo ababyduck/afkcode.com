@@ -4,9 +4,10 @@ from projects.models import Project
 
 
 def course_index(request):
-    courses_in_progress = Course.objects.filter(in_progress=True).order_by('school', 'subject', 'code')
-    courses_completed = Course.objects.filter(completed=True).order_by('school', 'subject', 'code')
-    courses_planned = Course.objects.filter(in_progress=False, completed=False).order_by('school', 'subject', 'code')
+    all_courses = Course.objects.all()
+    courses_in_progress = all_courses.filter(in_progress=True).order_by('school', 'subject', 'code')
+    courses_completed = all_courses.filter(completed=True).order_by('school', 'subject', 'code')
+    courses_planned = all_courses.filter(in_progress=False, completed=False).order_by('school', 'subject', 'code')
     context = {
         'courses_in_progress': courses_in_progress,
         'courses_completed': courses_completed,
