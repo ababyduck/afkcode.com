@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Category
 from blog.forms import CommentForm
+from django.http import HttpResponse, HttpResponseNotFound
 
 
 def blog_index(request):
@@ -12,6 +13,11 @@ def blog_index(request):
 
 
 def blog_category(request, category):
+    try:
+        Category.objects.get(name=category)
+    except Category.DoesNotExist:
+        return HttpResponseNotFound(f'<h1>404: "{category}" is not a valid category</h1>')
+
     posts = Post.objects.filter(
         categories__name__contains=category
     ).order_by(
@@ -21,6 +27,7 @@ def blog_category(request, category):
         'category': category,
         'posts': posts
     }
+
     return render(request, 'blog_category.html', context)
 
 
