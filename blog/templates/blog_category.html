@@ -14,6 +14,8 @@
         {% endfor %}
     </small>
     <p>{{ post.body | slice:':400' | safe }}...</p>
+    {% empty %}
+        <p>No content found with category "{{ category.name }}".</p>
     {% endfor %}
 </div>
 {% endblock %}
