@@ -1,21 +1,44 @@
 {% extends 'base.html' %}
 {% block page_content %}
 <div class="col-md-8 offset-md-2">
-    <h1>{{ category }}</h1>
+    <h1>Category: {{ category }}</h1>
     <hr>
-    {% for post in posts %}
-    <h2><a href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">{{ post.title }}</a></h2>
-    <small>
-        {{ post.created_on.date }} |&nbsp; Categories: &nbsp;
-        {% for category in post.categories.all %}
-            <a href="{% url 'blog_category' category.name %}">
-            {{ category.name }}
-            </a>&nbsp;
+
+    {% if projects %}
+        <h2>Projects:</h2>
+        <ul>
+        {% for project in projects %}
+            <li><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></li>
         {% endfor %}
-    </small>
-    <p>{{ post.body | slice:':400' | safe }}...</p>
-    {% empty %}
-        <p>No content found with this category.</p>
-    {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if courses %}
+        <h2>Courses:</h2>
+        <ul>
+        {% for course in courses %}
+            <li><a href="{{ course.get_absolute_url }}">{{ course.subject }} {{ course.code }}: {{ course.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if posts %}
+        <h2>Posts:</h2>
+        {% for post in posts %}
+        <h2><a href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">{{ post.title }}</a></h2>
+        <small>
+            {{ post.created_on.date }} |&nbsp; Categories: &nbsp;
+            {% for category in post.categories.all %}
+                <a href="{% url 'blog_category' category.name %}">
+                {{ category.name }}
+                </a>&nbsp;
+            {% endfor %}
+        </small>
+        <p>{{ post.body | slice:':400' | safe }}...</p>
+        {% empty %}
+            <p>No content found with this category.</p>
+        {% endfor %}
+    {% endif %}
+
 </div>
 {% endblock %}

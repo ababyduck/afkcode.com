@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from blog.models import Post, Comment, Category
 from blog.forms import CommentForm
+from projects.models import Project
+from courses.models import Course
 from django.http import HttpResponse, HttpResponseNotFound
 
 
@@ -23,9 +25,15 @@ def blog_category(request, category):
     ).order_by(
         '-created_on'
     )
+
+    projects = Project.objects.filter(categories__name__contains=category).order_by('title')
+    courses = Course.objects.filter(categories__name__contains=category).order_by('school', 'subject', 'code')
+
     context = {
         'category': category,
-        'posts': posts
+        'posts': posts,
+        'projects': projects,
+        'courses': courses
     }
 
     return render(request, 'blog_category.html', context)

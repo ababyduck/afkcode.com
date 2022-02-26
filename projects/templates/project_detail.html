@@ -20,7 +20,7 @@
         <ul class="list-inline">
         {% for category in project.categories.all %}
             <li class="list-inline-item">
-                <a href="#">{{ category.name }}</a> &nbsp;
+                <a href="{% url 'blog_category' category.name %}">{{ category.name }}</a> &nbsp;
             </li>
         {% endfor %}
         </ul>
