@@ -7,7 +7,7 @@
 <h1>{{ project.title }}</h1>
 <div class="row">
     <div class="col-md-8">
-        <img src="{% get_media_prefix %}{{ project.image.name }}" alt="Screenshot of {{ project.title }}" width="100%">
+        <img src="{% get_media_prefix %}{{ project.image.name }}" alt="{{ project.image_alt_text }}" width="100%">
     </div>
     <div class="col-md-4">
         <h5>About the project:</h5>
