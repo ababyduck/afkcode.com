@@ -6,3 +6,5 @@ Pillow==9.0.1
 whitenoise==6.0.0
 Brotli==1.0.9
 django-minify-html==1.0.0
+boto3==1.21.8
+django-storages==1.12.3

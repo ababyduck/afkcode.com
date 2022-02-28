@@ -9,10 +9,7 @@
     {% for project in projects %}
     <div class="col-md-4">
         <div class="card mb-2">
-            {% comment %}
-            <img class="card-img-top" src="{% get_media_prefix %}{{ project.image.name }}">
-            {% endcomment %}
-            <img class="card-img-top" src="http://via.placeholder.com/900x600" alt="Placeholder image">
+            <img class="card-img-top" src="{% get_media_prefix %}{{ project.image.name }}" alt="{{ project.image_alt_text }}">
             <div class="card-body">
                 <h5 class="card-title">{{ project.title }}</h5>
                 <p class="card-text">{{ project.description | safe | linebreaks }}</p>
