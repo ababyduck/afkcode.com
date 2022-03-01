@@ -63,7 +63,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
-# Will use this to determine which db to use
+# Determines which db to use, some security settings
 DEVELOPMENT = os.getenv('DJANGO_DEVELOPMENT', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
@@ -167,3 +167,12 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Using a secure-only CSRF cookie makes it more difficult for network traffic sniffers to steal the CSRF token.
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Redirect HTTP to HTTPS in production
+if not DEVELOPMENT:
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 3600
