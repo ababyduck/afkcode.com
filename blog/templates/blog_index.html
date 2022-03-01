@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load markdownify %}
 
 {% block title %}afkcode.com - Blog{% endblock title %}
 
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pygments-tomorrow-night-eighties.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pygments-override.css' %}">
+{% endblock %}
+
 {% block page_content %}
-{% load markdownify %}
 
 <div class="col-md-8 offset-md-2">
     <h1>Blog Index</h1>
@@ -16,9 +22,8 @@
             <a href="{% url 'blog_category' category.name %}">{{ category.name }}</a>&nbsp;
         {% endfor %}
     </small>
-    <div>
-        {{ post.body | slice:':360' | markdown | safe }}
-        {% if post.body|length > 360 %}...{% endif %}
+    <div id="body_{{ post.slug }}">
+        {{ post.body | truncatewords_html:60 | markdown | safe }}
     </div>
     {% empty %}
         <p>Nothing to display.</p>
