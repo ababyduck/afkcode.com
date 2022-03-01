@@ -10,14 +10,16 @@
         <img src="{% get_media_prefix %}{{ project.image.name }}" alt="{{ project.image_alt_text }}" width="100%">
     </div>
     <div class="col-md-4">
-        <h5>About the project:</h5>
+        <h5>About this project:</h5>
         <p>{{ project.description | safe | linebreaks }}</p>
         <br>
         <h5>Categories:</h5>
         <ul class="list-inline">
         {% for category in project.categories.all %}
             <li class="list-inline-item">
-                <a href="{% url 'blog_category' category.name %}">{{ category.name }}</a> &nbsp;
+                <span class="badge rounded-pill bg-secondary">
+                    <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>&nbsp;
+                </span>
             </li>
         {% endfor %}
         </ul>
