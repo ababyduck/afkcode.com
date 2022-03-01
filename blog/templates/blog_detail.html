@@ -11,7 +11,9 @@
             <a href="{% url 'blog_category' category.name %}">{{ category.name }}</a>&nbsp;
         {% endfor %}
     </small>
-    <p>{{ post.body | safe | linebreaks }}</p>
+    {% load markdownify %}
+    <p>{{ post.body | markdown | safe }}</p>
+
     <h3>Leave a comment:</h3>
     <form action="/blog/{{ post.pk }}/" method="post">
         {% csrf_token %}
