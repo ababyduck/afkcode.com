@@ -2,6 +2,12 @@
 {% load static %}
 {% load markdownify %}
 
+{% block title %}afkcode.com - Category: {{ category }}{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pygments-tomorrow-night-eighties.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pygments-override.css' %}">
+{% endblock %}
 
 {% block page_content %}
 <div class="col-md-8 offset-md-2">
