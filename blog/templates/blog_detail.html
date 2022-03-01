@@ -23,6 +23,7 @@
     {% load markdownify %}
     <p>{{ post.body | markdown | safe }}</p>
 
+    <h3 class="text-secondary">(Comments temporarily disabled)</h3>
     {% comment %}
     <h3>Leave a comment:</h3>
     <form action="/blog/{{ post.pk }}/" method="post">
