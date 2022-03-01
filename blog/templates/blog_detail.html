@@ -23,6 +23,7 @@
     {% load markdownify %}
     <p>{{ post.body | markdown | safe }}</p>
 
+    {% comment %}
     <h3>Leave a comment:</h3>
     <form action="/blog/{{ post.pk }}/" method="post">
         {% csrf_token %}
@@ -43,5 +44,7 @@
     <p>{{ comment.body }}</p>
     <hr>
     {% endfor %}
+    {% endcomment %}
+
 </div>
 {% endblock %}
