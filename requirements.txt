@@ -16,5 +16,6 @@ django-minify-html==1.0.0
 boto3==1.21.8
 django-storages==1.12.3
 
-# Experimental
-#django-markdownx==3.0.1
+# Markdown and code highlighting
+mistune==2.0.2
+Pygments==2.11.2

@@ -1,0 +1,11 @@
+.highlight, .highlight pre, .highlight table {
+    border-radius: 5px;
+    padding: 4px 6px;
+    margin: 0;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 12pt;
+}
+.highlight {
+    margin: 0 0.5em 1em 0.25em;
+    box-shadow: 4px 5px 8px #bbbbbb;
+}
