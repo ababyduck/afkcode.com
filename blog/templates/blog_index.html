@@ -32,7 +32,7 @@
         </div>
 
         <div class="text-secondary">
-            {{ post.body | truncatewords_html:80 | markdown | safe }}
+            {{ post.body | truncatewords_html:50 | markdown | safe }}
         </div>
         <div>
             <a role="button" class="btn btn-primary float-start" href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">Read more</a>
