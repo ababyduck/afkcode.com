@@ -82,6 +82,8 @@ INSTALLED_APPS = [
     'courses',
     'django_minify_html',
 ]
+if DEVELOPMENT:
+    INSTALLED_APPS.append('django_sass')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
