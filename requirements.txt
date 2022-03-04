@@ -19,3 +19,6 @@ django-storages==1.12.3
 # Markdown and code highlighting
 mistune==2.0.2
 Pygments==2.11.2
+
+# Spam protection
+akismet==1.1

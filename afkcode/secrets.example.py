@@ -15,3 +15,6 @@ def set_environment_variables():
     os.environ['DATABASE_URL'] = 'postgres://user:pass@localhost:5432/dbname'
     # Hosts that django is allowed to run on
     os.environ['DJANGO_ALLOWED_HOSTS'] = '127.0.0.1,localhost'
+    # Spam protection
+    os.environ['AKISMET_API_KEY'] = ''
+    os.environ['AKISMET_BLOG_URL'] = ''
