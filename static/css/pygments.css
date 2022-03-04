@@ -7,6 +7,6 @@
     font-size: 12pt;
 }
 .highlight {
-    margin: 0 0.5em 1em 0.25em;
-    box-shadow: 4px 5px 8px #bbbbbb;
+    margin: 0 .5em 1em .25em;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
 }
