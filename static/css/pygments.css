@@ -8,5 +8,5 @@
 }
 .highlight {
     margin: 0 0.5em 1em 0.25em;
-    box-shadow: 4px 5px 8px #bbbbbb;
+    box-shadow: 4px 5px 8px rgb(0,0,0,20%);
 }
