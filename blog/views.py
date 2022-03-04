@@ -3,7 +3,10 @@ from blog.models import Post, Comment, Category
 from blog.forms import CommentForm
 from projects.models import Project
 from courses.models import Course
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponseForbidden
+from django.conf import settings
+from akismet import Akismet
+from blog.banned_words import contains_banned_words
 
 
 def blog_index(request):
@@ -46,9 +49,26 @@ def blog_detail(request, year, month, pk, slug):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
+            author = form.cleaned_data['author']
+            body = form.cleaned_data['body']
+
+            if contains_banned_words(author) or contains_banned_words(body):
+                return HttpResponseForbidden('<h1>Comment failed. Try being nicer.</h1>')
+
+            akismet_api = Akismet(key=settings.AKISMET_API_KEY, blog_url=settings.AKISMET_BLOG_URL)
+            is_spam = akismet_api.comment_check(
+                user_ip=request.META['REMOTE_ADDR'],
+                user_agent=request.META['HTTP_USER_AGENT'],
+                comment_type='comment',
+                comment_author=author,
+                comment_content=body
+            )
+            if is_spam:
+                return HttpResponseForbidden('<h1>Comment failed.</h1>')
+
             comment = Comment(
-                author=form.cleaned_data['author'],
-                body=form.cleaned_data['body'],
+                author=author,
+                body=body,
                 post=post
             )
             comment.save()

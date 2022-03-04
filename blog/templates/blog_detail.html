@@ -11,21 +11,28 @@
 {% block page_content %}
 
 <div class="col-md-9 offset-md-1">
-    <div id="post_{{ post.slug }}" class="card my-4 p-3 shadow-sm">
-        <h1>
-            <a class="link-dark text-decoration-none" href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">
-                {{ post.title }}
-            </a>
-        </h1>
-        <div class="mb-3">
-            <span class="datetime mt-1">
+    <div id="post_{{ post.slug }}" class="card mt-3 mb-5 p-3 shadow">
+        <div class="card-title mb-0">
+            <h1>
+                <a class="link-dark text-decoration-none" href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">
+                    {{ post.title }}
+                </a>
+            </h1>
+        </div>
+
+        <div>
+            <span class="datetime float-start mx-1">
                 {{ post.created_on.date }}&nbsp;
             </span>
-            {% for category in post.categories.all %}
-                <span class="badge rounded-pill bg-secondary mx-1">
-                    <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
-                </span>
-            {% endfor %}
+            <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
+                {% for category in post.categories.all %}
+                    <li class="list-inline-item">
+                        <span class="badge rounded-pill bg-secondary">
+                            <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
 
         <div class="text-secondary">
@@ -33,36 +40,40 @@
         </div>
     </div>
 
-    <h3 class="text-secondary">(Comments temporarily disabled)</h3>
+    {% if comments %}
+        <div id="comments" class="mb-5">
+            <h3>Comments</h3>
+            {% for comment in comments %}
 
-    {% comment %}
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header">
+                        <h5 class="float-start">{{ comment.author }}</h5>
+                        <span class="card-text text-muted float-end">
+                            {{comment.created_on.date }}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ comment.body | markdown | safe }}</p>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <h3>Leave a comment</h3>
     <div id="comment-form" class="mb-3">
-        <h3>Leave a comment:</h3>
         <form action="/blog/{{ post.created_on.year }}/{{ post.created_on.month }}/{{ post.pk }}-{{ post.slug }}" method="post">
             {% csrf_token %}
-            <div class="form-group">
+            <div class="mb-2 shadow-sm">
                 {{ form.author }}
             </div>
-            <div class="form-group my-1">
+            <div class="mb-2 shadow-sm">
                 {{ form.body }}
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-
-    <div id="comments" class="mb-3">
-        <h3>Comments:</h3>
-        {% for comment in comments %}
-            <p>
-                On {{comment.created_on.date }}, {{ comment.author }} wrote:
-            </p>
-            <p>
-                {{ comment.body | linebreaks }}
-            </p>
-            <hr>
-        {% endfor %}
-    </div>
-    {% endcomment %}
 
 </div>
 {% endblock %}

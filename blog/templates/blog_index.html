@@ -13,21 +13,25 @@
 <div class="col-md-9 offset-md-1">
     {% for post in posts %}
 
-    <div id="post_{{ post.slug }}" class="card my-4 p-3 shadow-sm">
+    <div id="post_{{ post.slug }}" class="card mt-3 mb-4 p-3 shadow-sm">
         <h1>
             <a class="link-dark text-decoration-none" href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">
                 {{ post.title }}
             </a>
         </h1>
-        <div class="mb-3">
-            <span class="datetime mt-1">
+        <div>
+            <span class="datetime float-start mx-1">
                 {{ post.created_on.date }}&nbsp;
             </span>
-            {% for category in post.categories.all %}
-                <span class="badge rounded-pill bg-secondary mx-1">
-                    <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
-                </span>
-            {% endfor %}
+            <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
+                {% for category in post.categories.all %}
+                    <li class="list-inline-item">
+                        <span class="badge rounded-pill bg-secondary">
+                            <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
 
         <div class="text-secondary">
