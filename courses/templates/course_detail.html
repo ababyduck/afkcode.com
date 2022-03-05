@@ -15,9 +15,8 @@
             {% endif %}
         </p>
 
-        {% comment %} FIXME: Don't hardcode the school url {% endcomment %}
         <h2>School:</h2>
-        <img src="{% static 'img/school_logos/csumb_logo_transparent.png' %}"
+        <img src="{% get_media_prefix %}{{ course.school.logo }}"
              height="100"
              alt="{{ course.school.initials }} logo">
         <p><a href="{{ course.school.website }}">{{ course.school.name }}</a></p>
