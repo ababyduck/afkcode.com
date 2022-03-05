@@ -4,36 +4,55 @@
 {% block title %}afkcode.com - {{ course.subject }} {{ course.code }}: {{ course.name }}{% endblock title %}
 
 {% block content %}
-    <div>
-        <h1>{{ course.subject }} {{ course.code }} - {{ course.name }}</h1>
+    <div class="col-md-9 offset-md-1 mt-3">
+        <div class="card p-3">
+            <div class="row g-0">
+                <div class="col-sm-3">
+                    <img class="w-100"
+                            src="{% get_media_prefix %}{{ course.school.logo }}"
+                            alt="{{ course.school.initials }} logo">
+                </div>
+                <div class="col mx-3">
+                    <div class="card-title">
+                        <h1>{{ course.subject }} {{ course.code }}: {{ course.name }}</h1>
+                    </div>
+                    <div class="card-subtitle">
+                        <div class="card-text">{{ course.school }}</div>
+                        <div class="card-text float-start">{{ course.units }} units &nbsp; </div>
+                        <div id="categories">
+                            <ul class="list-inline">
+                                {% for category in course.categories.all %}
+                                    <li class="list-inline-item">
+                                        <span class="badge rounded-pill bg-secondary">
+                                            <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
+                                        </span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
 
-        <p>
-            {% if course.completed %}
-                <span class="badge bg-success">Completed</span>
-            {% elif course.in_progress %}
-                <span class="badge bg-info">In Progress</span>
+                </div>
+            </div>
+            <div class="row g-0 card-body">
+                <div class="card-text mb-3">
+                    {{ course.description | linebreaks }}
+                </div>
+            </div>
+
+            {% if projects %}
+                <div class="row mx-2">
+                    <label for="projects"><h2>Associated projects:</h2></label>
+                    <ul id="projects" class="list-group-flush">
+                        {% for project in projects %}
+                            <li class="list-group-item">
+                                <a href="{% url 'project_detail' project.pk project.slug %}">{{ project.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endif %}
-        </p>
 
-        <h2>School:</h2>
-        <img src="{% get_media_prefix %}{{ course.school.logo }}"
-             height="100"
-             alt="{{ course.school.initials }} logo">
-        <p><a href="{{ course.school.website }}">{{ course.school.name }}</a></p>
-        <h2>Units:</h2>
-        <p>{{ course.units }}</p>
-        <h2>Description:</h2>
-        <p>{{ course.description | safe | linebreaks }}</p>
-
-        <h2>Associated projects:</h2>
-
-        <ul class="list-inline">
-            {% for project in projects %}
-                <li class="list-inline-item">
-                    <a href="{% url 'project_detail' project.pk project.slug %}">{{ project.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-
+        </div>
     </div>
 {% endblock content %}
