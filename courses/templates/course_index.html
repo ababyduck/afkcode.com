@@ -3,60 +3,58 @@
 
 {% block title %}afkcode.com - Courses{% endblock title %}
 
-{% block page_content %}
-<h1>Courses</h1>
-<div class="row">
-
-    {% if courses_in_progress %}
-        <h2>In Progress</h2>
-        {% for course in courses_in_progress %}
-        <div class="col-md-4">
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
-                    <p class="card-text">{{ course.name }}</p>
-                    <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
-                        Read More
-                    </a>
+{% block content %}
+    <h1>Courses</h1>
+    <div class="row">
+        {% if courses_in_progress %}
+            <h2>In Progress</h2>
+            {% for course in courses_in_progress %}
+            <div class="col-md-4">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
+                        <p class="card-text">{{ course.name }}</p>
+                        <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
+                            Read More
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    {% endif %}
+            {% endfor %}
+        {% endif %}
 
-    {% if courses_completed %}
-        <h2>Completed</h2>
-        {% for course in courses_completed %}
-        <div class="col-md-4">
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
-                    <p class="card-text">{{ course.name }}</p>
-                    <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
-                        Read More
-                    </a>
+        {% if courses_completed %}
+            <h2>Completed</h2>
+            {% for course in courses_completed %}
+            <div class="col-md-4">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
+                        <p class="card-text">{{ course.name }}</p>
+                        <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
+                            Read More
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    {% endif %}
+            {% endfor %}
+        {% endif %}
 
-    {% if courses_planned %}
-        <h2>Planned</h2>
-        {% for course in courses_planned %}
-        <div class="col-md-4">
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
-                    <p class="card-text">{{ course.name }}</p>
-                    <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
-                        Read More
-                    </a>
+        {% if courses_planned %}
+            <h2>Planned</h2>
+            {% for course in courses_planned %}
+            <div class="col-md-4">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
+                        <p class="card-text">{{ course.name }}</p>
+                        <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
+                            Read More
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    {% endif %}
-
-</div>
-{% endblock %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock content %}

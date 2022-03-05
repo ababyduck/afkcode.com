@@ -4,28 +4,28 @@
 
 {% block title %}afkcode.com - Projects{% endblock title %}
 
-{% block head %}
+{% block style %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/pygments.css' %}">
-{% endblock %}
+{% endblock style %}
 
-{% block page_content %}
-<h1>Projects</h1>
-<div class="row">
-    {% for project in projects %}
-    <div class="col-md-4">
-        <div class="card mb-2 shadow-sm">
-            <img class="card-img-top" src="{% get_media_prefix %}{{ project.image.name }}" alt="{{ project.image_alt_text }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ project.title }}</h5>
-                <p class="card-text">{{ project.description | truncatewords_html:60 | markdown | safe }}</p>
-                <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary">
-                    Read More
-                </a>
+{% block content %}
+    <h1>Projects</h1>
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-4">
+            <div class="card mb-2 shadow-sm">
+                <img class="card-img-top" src="{% get_media_prefix %}{{ project.image.name }}" alt="{{ project.image_alt_text }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description | truncatewords_html:60 | markdown | safe }}</p>
+                    <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary">
+                        Read More
+                    </a>
+                </div>
             </div>
         </div>
+        {% empty %}
+            <p>Nothing to display.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-        <p>Nothing to display.</p>
-    {% endfor %}
-</div>
-{% endblock %}
+{% endblock content %}

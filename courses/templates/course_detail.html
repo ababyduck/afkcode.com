@@ -3,38 +3,38 @@
 
 {% block title %}afkcode.com - {{ course.subject }} {{ course.code }}: {{ course.name }}{% endblock title %}
 
-{% block page_content %}
-<div>
-    <h1>{{ course.subject }} {{ course.code }} - {{ course.name }}</h1>
+{% block content %}
+    <div>
+        <h1>{{ course.subject }} {{ course.code }} - {{ course.name }}</h1>
 
-<p>
-    {% if course.completed %}
-        <span class="badge bg-success">Completed</span>
-    {% elif course.in_progress %}
-        <span class="badge bg-info">In Progress</span>
-    {% endif %}
-</p>
+        <p>
+            {% if course.completed %}
+                <span class="badge bg-success">Completed</span>
+            {% elif course.in_progress %}
+                <span class="badge bg-info">In Progress</span>
+            {% endif %}
+        </p>
 
-    {% comment %} FIXME: Don't hardcode the school url {% endcomment %}
-    <h2>School:</h2>
-    <img src="{% static 'img/school_logos/csumb_logo_transparent.png' %}"
-         height="100"
-         alt="{{ course.school.initials }} logo">
-    <p><a href="{{ course.school.website }}">{{ course.school.name }}</a></p>
-    <h2>Units:</h2>
-    <p>{{ course.units }}</p>
-    <h2>Description:</h2>
-    <p>{{ course.description | safe | linebreaks }}</p>
+        {% comment %} FIXME: Don't hardcode the school url {% endcomment %}
+        <h2>School:</h2>
+        <img src="{% static 'img/school_logos/csumb_logo_transparent.png' %}"
+             height="100"
+             alt="{{ course.school.initials }} logo">
+        <p><a href="{{ course.school.website }}">{{ course.school.name }}</a></p>
+        <h2>Units:</h2>
+        <p>{{ course.units }}</p>
+        <h2>Description:</h2>
+        <p>{{ course.description | safe | linebreaks }}</p>
 
-    <h2>Associated projects:</h2>
+        <h2>Associated projects:</h2>
 
-    <ul class="list-inline">
-        {% for project in projects %}
-            <li class="list-inline-item">
-                <a href="{% url 'project_detail' project.pk project.slug %}">{{ project.title }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+        <ul class="list-inline">
+            {% for project in projects %}
+                <li class="list-inline-item">
+                    <a href="{% url 'project_detail' project.pk project.slug %}">{{ project.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
 
-</div>
-{% endblock %}
+    </div>
+{% endblock content %}
