@@ -10,7 +10,7 @@
 
 {% block content %}
     <h1>Projects</h1>
-    <div class="row">
+    <div class="row gx-3 gy-2">
         {% for project in projects %}
         <div class="col-md-4">
             <div class="card mb-2 shadow-sm">
@@ -19,7 +19,7 @@
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ project.title }}</h5>
-                    <p class="card-text">{{ project.description | truncatewords_html:60 | markdown | safe }}</p>
+                    <p class="card-text">{{ project.description | truncatewords_html:20 | markdown | safe }}</p>
                     <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary">
                         Read More
                     </a>
@@ -27,7 +27,7 @@
             </div>
         </div>
         {% empty %}
-            <p>Nothing to display.</p>
+            <p>No projects to display.</p>
         {% endfor %}
     </div>
 {% endblock content %}
