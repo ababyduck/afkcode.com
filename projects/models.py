@@ -7,7 +7,7 @@ from afkcode.utils import image_resize
 class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='project_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='project_images/', blank=True)
     image_alt_text = models.CharField(max_length=100, null=True, blank=True)
     course = models.ForeignKey('courses.Course', on_delete=models.SET_NULL, null=True, blank=True)
     categories = models.ManyToManyField('blog.Category')
@@ -28,6 +28,10 @@ class Project(models.Model):
         value = self.title
         self.slug = slugify(value, allow_unicode=True)
         # Resize image if necessary
-        image_resize(self.image, 900, 600)
+        try:
+            image_resize(self.image, 900, 600)
+        except ValueError:
+            # If image is blank, we can't resize
+            pass
 
         super().save(*args, **kwargs)
