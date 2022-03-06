@@ -7,7 +7,7 @@ from afkcode.utils import image_resize
 class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='project_images/', blank=True)
+    image = models.ImageField(upload_to='project_images/', null=True, blank=True)
     image_alt_text = models.CharField(max_length=100, null=True, blank=True)
     course = models.ForeignKey('courses.Course', on_delete=models.SET_NULL, null=True, blank=True)
     categories = models.ManyToManyField('blog.Category')
