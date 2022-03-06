@@ -5,4 +5,5 @@ class CompliantMinifyHtmlMiddleware(MinifyHtmlMiddleware):
     minify_args = MinifyHtmlMiddleware.minify_args | {
         'do_not_minify_doctype': True,
         'keep_spaces_between_attributes': True,
+        'ensure_spec_compliant_unquoted_attribute_values': True,
     }
