@@ -92,12 +92,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_minify_html.middleware.MinifyHtmlMiddleware'
+    # 'django_minify_html.middleware.MinifyHtmlMiddleware',
+    'afkcode.middleware.CompliantMinifyHtmlMiddleware'
 ]
 # Compression support
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 ROOT_URLCONF = 'afkcode.urls'
 
