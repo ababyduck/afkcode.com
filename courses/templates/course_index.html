@@ -14,7 +14,8 @@
                     <div class="card mb-2 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
-                            <p class="card-text">{{ course.name }}</p>
+                            <p class="card-subtitle mb-2">{{ course.name }}</p>
+                            <p class="card-text text-muted">{{ course.get_semester_display }} {{ course.year }}</p>
                             <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
                                 Read More
                             </a>
@@ -33,7 +34,8 @@
                     <div class="card mb-2 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
-                            <p class="card-text">{{ course.name }}</p>
+                            <p class="card-subtitle mb-2">{{ course.name }}</p>
+                            <p class="card-text text-muted">{{ course.get_semester_display }} {{ course.year }}</p>
                             <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
                                 Read More
                             </a>
@@ -52,7 +54,8 @@
                     <div class="card mb-2 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
-                            <p class="card-text">{{ course.name }}</p>
+                            <p class="card-subtitle mb-2">{{ course.name }}</p>
+                            <p class="card-text text-muted">{{ course.get_semester_display }} {{ course.year }}</p>
                             <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary">
                                 Read More
                             </a>
