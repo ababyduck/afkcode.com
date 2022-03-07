@@ -33,9 +33,9 @@
                         </div>
 
                         <div id="semester" class="card-text">
-                            {% if course.completed %}
+                            {% if course.get_status_display == 'Completed' %}
                                 <span class="badge bg-gradient bg-success">Completed</span>
-                            {% elif course.in_progress %}
+                            {% elif course.get_status_display == 'In Progress' %}
                                 <span class="badge bg-gradient bg-info">In Progress</span>
                             {% else %}
                                 Planned for
