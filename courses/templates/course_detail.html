@@ -18,6 +18,7 @@
                     </div>
                     <div class="card-subtitle">
                         <div class="card-text">{{ course.school }}</div>
+
                         <div class="card-text float-start">{{ course.units }} units &nbsp; </div>
                         <div id="categories">
                             <ul class="list-inline">
@@ -30,6 +31,18 @@
                                 {% endfor %}
                             </ul>
                         </div>
+
+                        <div id="semester" class="card-text">
+                            {% if course.completed %}
+                                <span class="badge bg-gradient bg-success">Completed</span>
+                            {% elif course.in_progress %}
+                                <span class="badge bg-gradient bg-info">In Progress</span>
+                            {% else %}
+                                Planned for
+                            {% endif %}
+                            {{ course.get_semester_display }} {{ course.year }}
+                        </div>
+
                     </div>
 
                 </div>
