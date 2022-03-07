@@ -21,9 +21,13 @@ class Course(models.Model):
     description = models.TextField(null=True, blank=True)
     school = models.ForeignKey('School', on_delete=models.PROTECT)
     categories = models.ManyToManyField('blog.Category')
-    in_progress = models.BooleanField(default=False)
-    completed = models.BooleanField(default=False)
     slug = models.SlugField(default='', editable=False, max_length=25, null=False)
+
+    class Status(models.IntegerChoices):
+        PLANNED = 1
+        IN_PROGRESS = 2
+        COMPLETED = 3
+    status = models.IntegerField(choices=Status.choices, default=Status.PLANNED)
 
     class Semester(models.IntegerChoices):
         SPRING_A = 1
@@ -32,7 +36,6 @@ class Course(models.Model):
         SUMMER_B = 4
         FALL_A = 5
         FALL_B = 6
-
     semester = models.IntegerField(choices=Semester.choices, blank=True, null=True)
     year = models.PositiveSmallIntegerField(blank=True, null=True)
 

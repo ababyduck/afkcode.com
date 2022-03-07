@@ -5,9 +5,9 @@ from projects.models import Project
 
 def course_index(request):
     all_courses = Course.objects.all()
-    courses_in_progress = all_courses.filter(in_progress=True).order_by('school__name', 'subject', 'code')
-    courses_completed = all_courses.filter(completed=True).order_by('year', 'semester')
-    courses_planned = all_courses.filter(in_progress=False, completed=False).order_by('year', 'semester')
+    courses_in_progress = all_courses.filter(status=Course.Status.IN_PROGRESS).order_by('school__name', 'subject', 'code')
+    courses_completed = all_courses.filter(status=Course.Status.COMPLETED).order_by('year', 'semester')
+    courses_planned = all_courses.filter(status=Course.Status.PLANNED).order_by('year', 'semester')
     context = {
         'courses_in_progress': courses_in_progress,
         'courses_completed': courses_completed,
