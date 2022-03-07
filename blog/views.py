@@ -50,6 +50,8 @@ def blog_detail(request, year, month, pk, slug):
         form = CommentForm(request.POST)
         if form.is_valid():
             author = form.cleaned_data['author']
+            author_ip = request.META['REMOTE_ADDR']
+            author_user_agent = request.META['HTTP_USER_AGENT']
             body = form.cleaned_data['body']
 
             if contains_banned_words(author) or contains_banned_words(body):
@@ -57,8 +59,8 @@ def blog_detail(request, year, month, pk, slug):
 
             akismet_api = Akismet(key=settings.AKISMET_API_KEY, blog_url=settings.AKISMET_BLOG_URL)
             is_spam = akismet_api.comment_check(
-                user_ip=request.META['REMOTE_ADDR'],
-                user_agent=request.META['HTTP_USER_AGENT'],
+                user_ip=author_ip,
+                user_agent=author_user_agent,
                 comment_type='comment',
                 comment_author=author,
                 comment_content=body
@@ -68,6 +70,8 @@ def blog_detail(request, year, month, pk, slug):
 
             comment = Comment(
                 author=author,
+                author_ip=author_ip,
+                author_user_agent=author_user_agent,
                 body=body,
                 post=post
             )

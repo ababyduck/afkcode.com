@@ -21,7 +21,7 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='posts')
-    slug = models.SlugField(default='', editable=False, max_length=255, null=False)
+    slug = models.SlugField(default='', max_length=255, null=False)
 
     def __str__(self):
         return f'{self.title} ({self.created_on.strftime(TIME_FORMAT)})'
@@ -41,6 +41,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     author = models.CharField(max_length=60)
+    author_ip = models.GenericIPAddressField(null=True)
+    author_user_agent = models.CharField(max_length=250, null=True)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
