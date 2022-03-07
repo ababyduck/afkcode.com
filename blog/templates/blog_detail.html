@@ -39,23 +39,37 @@
             </div>
         </div>
 
+    </div>
+    <div class="col-md-7 offset-md-2">
+
         {% if comments %}
             <div id="comments" class="mb-5">
                 <h3>Comments</h3>
                 {% for comment in comments %}
-
-                    <div class="card shadow-sm mb-3">
-                        <div class="card-header">
-                            <h5 class="float-start">{{ comment.author }}</h5>
+                    <div id="comment-{{ comment.pk }}" class="card shadow-sm mb-3">
+                        <div class="card-header pb-1">
+                            <h5 class="float-start">
+                                <!-- https://icons.getbootstrap.com/icons/person-circle/ -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" class="align-bottom bi bi-person-circle" fill="#6c757d" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                </svg>
+                                <span class="mx-1">{{ comment.author }}</span>
+                            </h5>
                             <span class="card-text text-muted float-end">
                                 {{comment.created_on.date }}
+                                <a href="#comment-{{ comment.pk }}" role="button" aria-label="Link to comment {{ comment.pk }} by {{ comment.author }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.1rem" height="1.1rem" fill="currentColor" class="bi bi-link" viewBox="0 0 16 16">
+                                        <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/>
+                                        <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z"/>
+                                    </svg>
+                                </a>
                             </span>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body py-2">
                             <p class="card-text">{{ comment.body | markdown | safe }}</p>
                         </div>
                     </div>
-
                 {% endfor %}
             </div>
         {% endif %}
@@ -73,5 +87,6 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+
     </div>
 {% endblock content %}
