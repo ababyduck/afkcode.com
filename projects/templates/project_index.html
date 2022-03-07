@@ -15,12 +15,14 @@
         <div class="col-md-6 col-lg-4 col-xxl-3">
             <div class="card mb-2 shadow-sm">
                 {% if project.image %}
-                    <img class="card-img-top" src="{% get_media_prefix %}{{ project.image.name }}" alt="{{ project.image_alt_text }}">
+                    <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}">
+                        <img class="card-img-top" src="{% get_media_prefix %}{{ project.image.name }}" alt="{{ project.image_alt_text }}">
+                    </a>
                 {% endif %}
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <h5 class="card-title">{{ project.title }}</h5>
                     <p class="card-text">{{ project.description | truncatewords_html:20 | markdown | safe }}</p>
-                    <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary">
+                    <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary bg-gradient mt-1">
                         Read More
                     </a>
                 </div>

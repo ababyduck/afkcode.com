@@ -24,7 +24,7 @@
             <ul class="list-inline">
             {% for category in project.categories.all %}
                 <li class="list-inline-item">
-                    <span class="badge rounded-pill bg-secondary">
+                    <span class="badge rounded-pill bg-gradient bg-secondary">
                         <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
                     </span>
                 </li>
