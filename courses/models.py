@@ -17,13 +17,24 @@ class Course(models.Model):
     name = models.CharField(max_length=60)
     subject = models.CharField(max_length=10)
     code = models.CharField(max_length=5)
-    units = models.IntegerField()
+    units = models.PositiveSmallIntegerField()
     description = models.TextField(null=True, blank=True)
     school = models.ForeignKey('School', on_delete=models.PROTECT)
     categories = models.ManyToManyField('blog.Category')
     in_progress = models.BooleanField(default=False)
     completed = models.BooleanField(default=False)
     slug = models.SlugField(default='', editable=False, max_length=25, null=False)
+
+    class Semester(models.IntegerChoices):
+        SPRING_A = 1
+        SPRING_B = 2
+        SUMMER_A = 3
+        SUMMER_B = 4
+        FALL_A = 5
+        FALL_B = 6
+
+    semester = models.IntegerField(choices=Semester.choices, blank=True, null=True)
+    year = models.PositiveSmallIntegerField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.school.initials}: {self.subject}{self.code} - {self.name}'
