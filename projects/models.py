@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
 from afkcode.utils import image_resize
 
@@ -9,9 +10,11 @@ class Project(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='project_images/', null=True, blank=True)
     image_alt_text = models.CharField(max_length=100, null=True, blank=True)
-    course = models.ForeignKey('courses.Course', on_delete=models.SET_NULL, null=True, blank=True)
     categories = models.ManyToManyField('blog.Category')
+    course = models.ForeignKey('courses.Course', on_delete=models.SET_NULL, null=True, blank=True)
     slug = models.SlugField(default='', editable=False, max_length=100, null=False)
+    date = models.DateField(default=timezone.now)
+    sorting_priority = models.SmallIntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -27,6 +30,7 @@ class Project(models.Model):
         # Generate slug url
         value = self.title
         self.slug = slugify(value, allow_unicode=True)
+
         # Resize image if necessary
         try:
             image_resize(self.image, 900, 600)
