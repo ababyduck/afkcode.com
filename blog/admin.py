@@ -3,7 +3,6 @@ from blog.models import Post, Category, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug',)
     date_hierarchy = 'created_on'
 
 

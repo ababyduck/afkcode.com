@@ -1,8 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.utils import timezone
 
-TIME_FORMAT = '%D, %T %Z'
+TIME_FORMAT = '%D, %I:%M %p %Z'
 
 
 class Category(models.Model):
@@ -18,13 +19,15 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
+    publish = models.BooleanField(default=False, help_text='Posts will not appear in the index until published')
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='posts', blank=True)
-    slug = models.SlugField(default='', max_length=255, null=False)
+    slug = models.SlugField(default='', max_length=255, editable=False)
 
     def __str__(self):
-        return f'{self.title} ({self.created_on.strftime(TIME_FORMAT)})'
+        local_timestamp = timezone.localtime(self.created_on).strftime(TIME_FORMAT)
+        return f'{"[Draft] " if self.publish is False else ""}{self.title} ({local_timestamp})'
 
     def get_absolute_url(self):
         kwargs = {

@@ -15,7 +15,7 @@
             <div class="p-4 py-3">
                 <div class="card-title">
                     <h1>
-                        <a class="link-dark text-decoration-none" href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">
+                        <a class="link-dark text-decoration-none" href="{% url 'blog_detail_with_date' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">
                             {{ post.title }}
                         </a>
                     </h1>

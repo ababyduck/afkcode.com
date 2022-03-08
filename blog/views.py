@@ -10,7 +10,7 @@ from blog.banned_words import contains_banned_words
 
 
 def blog_index(request):
-    posts = Post.objects.all().order_by('-created_on')
+    posts = Post.objects.filter(publish=True).order_by('-created_on')
     context = {
         'posts': posts
     }
@@ -42,7 +42,12 @@ def blog_category(request, category):
     return render(request, 'blog_category.html', context)
 
 
-def blog_detail(request, year, month, pk, slug):
+def blog_detail(request, pk, slug):
+    post = Post.objects.get(pk=pk)
+    return blog_detail_with_date(request, post.created_on.year, post.created_on.month, pk, slug)
+
+
+def blog_detail_with_date(request, year, month, pk, slug):
     post = Post.objects.get(pk=pk)
 
     form = CommentForm()
