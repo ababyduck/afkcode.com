@@ -31,15 +31,13 @@ class Project(models.Model):
         return reverse('project_detail', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
-        # Generate slug url
-        value = self.title
-        self.slug = slugify(value, allow_unicode=True)
+        self.slug = slugify(self.title, allow_unicode=True)
 
-        # Resize image if necessary
+        # Resize image before uploading if it exceeds given dimensions
         try:
             image_resize(self.image, 900, 600)
         except ValueError:
-            # If image is blank, we can't resize
+            # Nothing to resize if image field is null
             pass
 
-        super().save(*args, **kwargs)
+        super(Project, self).save(*args, **kwargs)
