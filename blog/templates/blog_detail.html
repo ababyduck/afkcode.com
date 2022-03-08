@@ -10,32 +10,38 @@
 
 {% block content %}
     <div class="col-md-9 offset-md-1">
-        <div id="post_{{ post.slug }}" class="card mt-3 mb-5 p-3 shadow">
-            <div class="card-title mb-0">
-                <h1>
-                    <a class="link-dark text-decoration-none" href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">
-                        {{ post.title }}
-                    </a>
-                </h1>
-            </div>
 
-            <div>
-                <span class="datetime float-start mx-1">
-                    {{ post.created_on.date }}&nbsp;
-                </span>
-                <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
-                    {% for category in post.categories.all %}
-                        <li class="list-inline-item">
-                            <span class="badge rounded-pill bg-gradient bg-secondary">
-                                <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
-                            </span>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div id="post_{{ post.slug }}" class="card mt-3 mb-5 p-0 shadow">
+            <div class="p-4 py-3">
+                <div class="card-title">
+                    <h1>
+                        <a class="link-dark text-decoration-none" href="{% url 'blog_detail' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">
+                            {{ post.title }}
+                        </a>
+                    </h1>
+                </div>
 
-            <div class="text-secondary">
-                {{ post.body | markdown | safe }}
+                <div class="card-text">
+                    <span class="datetime float-start mx-1">
+                        {{ post.created_on.date }}&nbsp;
+                    </span>
+                    <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
+                        {% for category in post.categories.all %}
+                            <li class="list-inline-item">
+                                <span class="badge rounded-pill bg-gradient bg-secondary">
+                                    <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="card-body p-1 py-0">
+                    <div class="card-text">
+                        {{ post.body | markdown | safe }}
+                    </div>
+                </div>
+
             </div>
         </div>
 
