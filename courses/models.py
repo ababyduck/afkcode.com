@@ -20,7 +20,7 @@ class Course(models.Model):
     units = models.PositiveSmallIntegerField()
     description = models.TextField(null=True, blank=True)
     school = models.ForeignKey('School', on_delete=models.PROTECT)
-    categories = models.ManyToManyField('blog.Category')
+    categories = models.ManyToManyField('blog.Category', blank=True)
     slug = models.SlugField(default='', editable=False, max_length=25, null=False)
 
     class Status(models.IntegerChoices):
