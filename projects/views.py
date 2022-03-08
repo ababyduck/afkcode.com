@@ -3,7 +3,7 @@ from projects.models import Project
 
 
 def project_index(request):
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('-sorting_priority', '-date', 'title')
     context = {
         'projects': projects
     }
