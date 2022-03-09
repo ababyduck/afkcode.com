@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load tz %}
 {% load markdownify %}
 
 {% block title %}afkcode.com - Blog{% endblock title %}
@@ -24,7 +25,9 @@
 
                 <div class="card-text">
                     <span class="datetime float-start mx-1">
-                        {{ post.created_on.date }}&nbsp;
+                        {% localtime on %}
+                            {{ post.created_on.date }}&nbsp;
+                        {% endlocaltime %}
                     </span>
                     <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
                         {% for category in post.categories.all %}
