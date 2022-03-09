@@ -3,7 +3,7 @@ from projects.models import Project
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    pass
+    date_hierarchy = 'date'
 
 
 admin.site.register(Project, ProjectAdmin)
