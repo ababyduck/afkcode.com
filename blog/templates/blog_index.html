@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="card-text">
-                    <span class="datetime float-start mx-1">
+                    <span class="datetime float-start mx-1 text-muted">
                         {% localtime on %}
                             {{ post.created_on.date }}&nbsp;
                         {% endlocaltime %}
@@ -36,12 +36,14 @@
                                     <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
                                 </span>
                             </li>
+                        {% empty %}
+                            <br>
                         {% endfor %}
                     </ul>
                 </div>
 
-                <div class="card-body p-1 py-0">
-                    <div class="card-text">
+                <div class="card-body p-1 py-0 my-4">
+                    <div class="card-text mb-4">
                         {{ post.body | truncatewords_html:50 | markdown | safe }}
                     </div>
                     <div class="card-text">
