@@ -42,9 +42,7 @@
                 {% for post in posts %}
                     <li>
                         <a href="{% url 'blog_detail_with_date' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">{{ post.title }}</a>, posted
-                        {% localtime on %}
-                            {{ post.created_on.date }}
-                        {% endlocaltime %}
+                        {{ post.created_on|localtime|date }}
                     </li>
                 {% endfor %}
             </ul>

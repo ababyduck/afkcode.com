@@ -25,9 +25,7 @@
 
                 <div class="card-text">
                     <span class="datetime float-start mx-1 text-muted">
-                        {% localtime on %}
-                            {{ post.created_on.date }}&nbsp;
-                        {% endlocaltime %}
+                        {{ post.created_on|localtime|date }}&nbsp;
                     </span>
                     <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
                         {% for category in post.categories.all %}

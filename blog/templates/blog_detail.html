@@ -24,9 +24,7 @@
 
                 <div class="card-text">
                     <span class="datetime float-start mx-1 text-muted">
-                        {% localtime on %}
-                            {{ post.created_on.date }}&nbsp;
-                        {% endlocaltime %}
+                        {{ post.created_on|localtime|date }}&nbsp;
                     </span>
                     <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
                         {% for category in post.categories.all %}
@@ -67,8 +65,9 @@
                                 </svg>
                                 <span class="mx-1">{{ comment.author }}</span>
                             </h5>
+                            <small class="align-bottom">&nbsp; {{comment.created_on|localtime|timesince }} ago</small>
                             <span class="card-text text-muted float-end">
-                                {{comment.created_on.date }}
+                                <span class="align-text-top">{{comment.created_on|localtime|date }}</span>
                                 <a href="#comment-{{ comment.pk }}" role="button" aria-label="Link to comment {{ comment.pk }} by {{ comment.author }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.1rem" height="1.1rem" fill="currentColor" class="bi bi-link" viewBox="0 0 16 16">
                                         <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/>
