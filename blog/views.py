@@ -3,7 +3,7 @@ from blog.models import Post, Comment, Category
 from blog.forms import CommentForm
 from projects.models import Project
 from courses.models import Course
-from django.http import HttpResponseNotFound, HttpResponseForbidden
+from django.http import HttpResponseNotFound, HttpResponseForbidden, HttpResponseRedirect
 from django.conf import settings
 from akismet import Akismet
 from blog.banned_words import contains_banned_words
@@ -44,7 +44,8 @@ def blog_category(request, category):
 
 def blog_detail(request, pk, slug):
     post = Post.objects.get(pk=pk)
-    return blog_detail_with_date(request, post.created_on.year, post.created_on.month, pk, slug)
+    # return blog_detail_with_date(request, post.created_on.year, post.created_on.month, pk, slug)
+    return HttpResponseRedirect(f'/blog/{post.created_on.year}/{post.created_on.month}/{pk}-{slug}')
 
 
 def blog_detail_with_date(request, year, month, pk, slug):
