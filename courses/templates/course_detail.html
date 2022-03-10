@@ -3,6 +3,8 @@
 
 {% block title %}afkcode.com - {{ course.subject }} {{ course.code }}: {{ course.name }}{% endblock title %}
 
+{% block nav %}{% with active_section='courses' %}{{ block.super }}{% endwith %}{% endblock %}
+
 {% block content %}
     <div class="col-md-9 offset-md-1 mt-3">
         <div class="card p-4 shadow">

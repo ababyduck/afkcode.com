@@ -3,6 +3,8 @@
 
 {% block title %}afkcode.com - Courses{% endblock title %}
 
+{% block nav %}{% with active_section='courses' %}{{ block.super }}{% endwith %}{% endblock %}
+
 {% block content %}
     <h1>Courses</h1>
     <div class="row">

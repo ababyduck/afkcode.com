@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/pygments.css' %}">
 {% endblock style %}
 
+{% block nav %}{% with active_section='blog' %}{{ block.super }}{% endwith %}{% endblock %}
+
 {% block content %}
     <div class="col-md-9 offset-md-1">
 

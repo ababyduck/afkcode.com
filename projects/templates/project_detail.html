@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/pygments.css' %}">
 {% endblock style %}
 
+{% block nav %}{% with active_section='projects' %}{{ block.super }}{% endwith %}{% endblock %}
+
 {% block content %}
     <h1>{{ project.title }}</h1>
     <div class="row">
