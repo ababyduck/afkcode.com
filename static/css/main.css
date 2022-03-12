@@ -1,9 +1,12 @@
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+.nav-link {
+    border-radius: 6px;
+}
+.nav-link.active {
+    background-color: #b294bb !important;
+    color: white !important;
+}
+.nav-link:hover {
+    background-color: #e0e0e0;
+    transition-duration: 300ms;
+    transition: ease-in-out;
 }
