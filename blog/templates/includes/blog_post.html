@@ -1,0 +1,45 @@
+{% load tz %}
+{% load markdownify %}
+
+<div id="post_{{ post.slug }}" class="card mt-3 mb-4 p-0 {% if detail_view %}shadow{% else %}shadow-sm{% endif %}">
+    <div class="p-4 py-3">
+        <div class="card-title">
+            <h1>
+                <a class="link-dark text-decoration-none" href="{% url 'blog_detail_with_date' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">
+                    {{ post.title }}
+                </a>
+            </h1>
+        </div>
+
+        <div class="card-text">
+            <span class="datetime float-start mx-1 text-muted">
+                {{ post.created_on|localtime|date }}&nbsp;
+            </span>
+            <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
+                {% for category in post.categories.all %}
+                    <li class="list-inline-item">
+                        <span class="badge rounded-pill bg-gradient bg-secondary">
+                            <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
+                        </span>
+                    </li>
+                {% empty %}
+                    <br>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card-body p-1 py-0 my-4">
+            <div class="card-text mb-4">
+                {% if detail_view %}
+                    {{ post.body | markdown | safe }}
+                {% else %}
+                    {{ post.body | truncatewords_html:50 | markdown | safe }}
+                    <div class="card-text">
+                        <a role="button" class="btn btn-primary float-start bg-gradient my-2" href="{% url 'blog_detail_with_date' year=post.created_on.year month=post.created_on.month pk=post.pk slug=post.slug %}">Read more</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>
