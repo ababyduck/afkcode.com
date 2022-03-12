@@ -1,0 +1,11 @@
+<ul aria-label="Category list for {{ description }}" class="list-inline">
+    {% for category in categories %}
+        <li class="list-inline-item me-2">
+            <span class="badge rounded-pill bg-gradient bg-secondary">
+                <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
+            </span>
+        </li>
+    {% empty %}
+        <br>
+    {% endfor %}
+</ul>

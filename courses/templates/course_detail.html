@@ -21,18 +21,9 @@
                     <div class="card-subtitle">
                         <div class="card-text">{{ course.school }}</div>
 
-                        <div class="card-text float-start">{{ course.units }} units &nbsp; </div>
-                        <div id="categories">
-                            <ul class="list-inline">
-                                {% for category in course.categories.all %}
-                                    <li class="list-inline-item">
-                                        <span class="badge rounded-pill bg-gradient bg-secondary">
-                                            <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
-                                        </span>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                        <div class="card-text float-start me-3">{{ course.units }} units</div>
+
+                        {% include 'includes/category_list.html' with categories=course.categories.all description=course.name %}
 
                         <div id="semester" class="card-text">
                             {% if course.get_status_display == 'Completed' %}

@@ -1,7 +1,7 @@
 {% load tz %}
 {% load markdownify %}
 
-<div id="post_{{ post.slug }}" class="card mt-3 mb-4 p-0 {% if detail_view %}shadow{% else %}shadow-sm{% endif %}">
+<div id="post_{{ post.slug }}" class="card mt-3 p-0 {% if detail_view %}shadow mb-5{% else %}shadow-sm mb-4{% endif %}">
     <div class="p-4 py-3">
         <div class="card-title">
             <h1>
@@ -12,20 +12,10 @@
         </div>
 
         <div class="card-text">
-            <span class="datetime float-start mx-1 text-muted">
+            <span class="datetime float-start ms-1 me-2 text-muted">
                 {{ post.created_on|localtime|date }}&nbsp;
             </span>
-            <ul aria-label="Categories for post {{ post.slug }}" class="list-inline">
-                {% for category in post.categories.all %}
-                    <li class="list-inline-item">
-                        <span class="badge rounded-pill bg-gradient bg-secondary">
-                            <a class="link-light" href="{% url 'blog_category' category.name %}">{{ category.name }}</a>
-                        </span>
-                    </li>
-                {% empty %}
-                    <br>
-                {% endfor %}
-            </ul>
+            {% include 'includes/category_list.html' with categories=post.categories.all description=post.slug %}
         </div>
 
         <div class="card-body p-1 py-0 my-4">
