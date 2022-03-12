@@ -69,18 +69,21 @@ DEVELOPMENT = os.getenv('DJANGO_DEVELOPMENT', 'False') == 'True'
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 INSTALLED_APPS = [
-    # 'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_fastdev',
+    # Modules
     'storages',
+    'django_fastdev',
+    'django_browser_reload',
+    # My apps
     'projects',
     'blog',
     'courses',
+    # Minify last
     'django_minify_html',
 ]
 
@@ -94,7 +97,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'django_minify_html.middleware.MinifyHtmlMiddleware',
-    'afkcode.middleware.CompliantMinifyHtmlMiddleware'
+    'afkcode.middleware.CompliantMinifyHtmlMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',  # Must come after any response-encoding middleware
 ]
 # Compression support
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
@@ -119,7 +123,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'afkcode.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

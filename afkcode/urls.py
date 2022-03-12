@@ -27,4 +27,5 @@ urlpatterns = [
     path('courses/', include('courses.urls')),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
     path('', include('blog.urls')),
+    path('__reload__/', include('django_browser_reload.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
