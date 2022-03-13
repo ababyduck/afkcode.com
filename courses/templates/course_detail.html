@@ -23,7 +23,7 @@
 
                         <div class="card-text float-start me-3">{{ course.units }} units</div>
 
-                        {% include 'includes/category_list.html' with categories=course.categories.all description=course.name %}
+                        {% include '_category_list.html' with categories=course.categories.all description=course.name %}
 
                         <div id="semester" class="card-text">
                             {% if course.get_status_display == 'Completed' %}

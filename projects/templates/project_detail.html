@@ -23,7 +23,7 @@
             <p>{{ project.description | markdown | safe }}</p>
             <br>
             <h5>Categories:</h5>
-            {% include 'includes/category_list.html' with categories=project.categories.all description=project.title %}
+            {% include '_category_list.html' with categories=project.categories.all description=project.title %}
         </div>
     </div>
 {% endblock content %}

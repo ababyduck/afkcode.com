@@ -8,15 +8,15 @@
 {% block content %}
     <div class="row">
         {% if courses_in_progress %}
-            {% include 'includes/course_card.html' with courses=courses_in_progress section_title='In Progress' %}
+            {% include '_course_index_card.html' with courses=courses_in_progress section_title='In Progress' %}
         {% endif %}
 
         {% if courses_completed %}
-            {% include 'includes/course_card.html' with courses=courses_completed section_title='Completed' %}
+            {% include '_course_index_card.html' with courses=courses_completed section_title='Completed' %}
         {% endif %}
 
         {% if courses_planned %}
-            {% include 'includes/course_card.html' with courses=courses_planned section_title='Planned' %}
+            {% include '_course_index_card.html' with courses=courses_planned section_title='Planned' %}
         {% endif %}
     </div>
 {% endblock content %}

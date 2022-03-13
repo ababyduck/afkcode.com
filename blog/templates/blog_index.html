@@ -15,7 +15,7 @@
     <div class="col-md-9 offset-md-1">
         {% for post in posts %}
 
-            {% include 'includes/post_card.html' with post=post detail_view=False %}
+            {% include '_blog_post_card.html' with post=post detail_view=False %}
 
         {% empty %}
             <p>No posts to display.</p>
