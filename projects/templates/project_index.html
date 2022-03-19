@@ -11,6 +11,7 @@
 {% block nav %}{% with active_section='projects' %}{{ block.super }}{% endwith %}{% endblock %}
 
 {% block content %}
+    <h1 class="h2 mb-3">Projects</h1>
     <div class="row gx-3 gy-2">
         {% for project in projects %}
         <div class="col-md-6 col-lg-4 col-xxl-3">
@@ -21,7 +22,7 @@
                     </a>
                 {% endif %}
                 <div class="card-body pb-0">
-                    <h5 class="card-title">{{ project.title }}</h5>
+                    <h2 class="h5 card-title">{{ project.title }}</h2>
                     <p class="card-text">{{ project.description | truncatewords_html:20 | markdown | safe }}</p>
                     <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary bg-gradient mt-1">
                         Read More

@@ -19,10 +19,10 @@
             {% endif %}
         </div>
         <div class="col-md-4">
-            <h5>About this project:</h5>
+            <h2 class="h5">About this project:</h2>
             <p>{{ project.description | markdown | safe }}</p>
             <br>
-            <h5>Categories:</h5>
+            <h2 class="h5">Categories:</h2>
             {% include '_category_list.html' with categories=project.categories.all description=project.title %}
         </div>
     </div>

@@ -51,7 +51,7 @@
             </div>
         {% endif %}
 
-        <h3>Leave a comment</h3>
+        <h1 class="h3">Leave a comment</h1>
         <div id="comment-form" class="mb-3">
             <form action="/blog/{{ post.created_on.year }}/{{ post.created_on.month }}/{{ post.pk }}-{{ post.slug }}" method="post">
                 {% csrf_token %}

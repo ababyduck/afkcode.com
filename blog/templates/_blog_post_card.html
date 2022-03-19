@@ -15,7 +15,7 @@
             <span class="datetime float-start ms-1 me-2 text-muted">
                 {{ post.created_on|localtime|date }}&nbsp;
             </span>
-            {% include '_category_list.html' with categories=post.categories.all description=post.slug %}
+            {% include '_category_list.html' with categories=post.categories.all description=post.title %}
         </div>
 
         <div class="card-body p-1 py-0 my-4">

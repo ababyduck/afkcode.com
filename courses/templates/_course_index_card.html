@@ -1,10 +1,10 @@
 <div class="row gx-3 gy-2 mt-0 mb-3">
-    <h2 class="bg-light sticky-top pb-2 my-0">{{ section_title }}</h2>
+    <h1 class="h2 bg-light sticky-top pb-2 my-0">{{ section_title }}</h1>
     {% for course in courses %}
     <div class="col-md-6 col-lg-4 col-xxl-3">
         <div class="card mb-2 shadow-sm">
             <div class="card-body">
-                <h5 class="card-title">{{ course.subject }} {{ course.code }}</h5>
+                <h2 class="h5 card-title">{{ course.subject }} {{ course.code }}</h2>
                 <p class="card-subtitle mb-2">{{ course.name }}</p>
                 <p class="card-text text-muted">{{ course.get_semester_display }} {{ course.year }}</p>
                 <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary bg-gradient">
