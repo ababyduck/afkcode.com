@@ -24,7 +24,7 @@
                 <div class="card-body pb-0">
                     <h2 class="h5 card-title">{{ project.title }}</h2>
                     <p class="card-text">{{ project.description | truncatewords_html:20 | markdown | safe }}</p>
-                    <a href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary bg-gradient mt-1">
+                    <a role="button" href="{% url 'project_detail' pk=project.pk slug=project.slug %}" class="btn btn-primary bg-gradient mt-1">
                         Read More
                     </a>
                 </div>

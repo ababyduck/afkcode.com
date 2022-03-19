@@ -7,7 +7,7 @@
                 <h2 class="h5 card-title">{{ course.subject }} {{ course.code }}</h2>
                 <p class="card-subtitle mb-2">{{ course.name }}</p>
                 <p class="card-text text-muted">{{ course.get_semester_display }} {{ course.year }}</p>
-                <a href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary bg-gradient">
+                <a role="button" href="{% url 'course_detail' pk=course.pk slug=course.slug %}" class="btn btn-primary bg-gradient">
                     Read More
                 </a>
             </div>
