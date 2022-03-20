@@ -7,8 +7,8 @@ def course_index(request, filter_by_school=''):
     if filter_by_school:
         all_courses = Course.objects.filter(school__initials=filter_by_school.upper())
     else:
-        all_courses = Course.objects.all()
-    courses_in_progress = all_courses.filter(status=Course.Status.IN_PROGRESS).order_by('school__name', 'subject', 'code')
+        all_courses = Course.objects.all().order_by('school__name')
+    courses_in_progress = all_courses.filter(status=Course.Status.IN_PROGRESS).order_by('subject', 'code')
     courses_completed = all_courses.filter(status=Course.Status.COMPLETED).order_by('year', 'semester')
     courses_planned = all_courses.filter(status=Course.Status.PLANNED).order_by('year', 'semester')
     context = {
