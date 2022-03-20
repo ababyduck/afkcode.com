@@ -79,7 +79,7 @@ INSTALLED_APPS = [
     'storages',
     'django_fastdev',
     'django_browser_reload',
-    'django_htmx',
+    # 'django_htmx',
     # My apps
     'projects',
     'blog',
@@ -97,7 +97,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_htmx.middleware.HtmxMiddleware',
+    # 'django_htmx.middleware.HtmxMiddleware',
     # 'django_minify_html.middleware.MinifyHtmlMiddleware',
     'afkcode.middleware.CompliantMinifyHtmlMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',  # Must come after any response-encoding middleware
