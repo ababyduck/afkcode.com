@@ -8,9 +8,14 @@ from django.conf import settings
 from akismet import Akismet
 from blog.banned_words import contains_banned_words
 
+MAX_POSTS_PER_PAGE = 50
 
-def blog_index(request):
-    posts = Post.objects.filter(publish=True).order_by('-created_on')
+
+def blog_index(request, page=1, posts_per_page=5):
+    if posts_per_page > MAX_POSTS_PER_PAGE:
+        posts_per_page = MAX_POSTS_PER_PAGE
+    first_index = (page-1) * posts_per_page
+    posts = Post.objects.filter(publish=True).order_by('-id')[first_index:first_index+posts_per_page]
     context = {
         'posts': posts
     }
