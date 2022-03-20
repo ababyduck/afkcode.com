@@ -12,7 +12,7 @@ def course_index(request, filter_by_school=''):
     courses_completed = all_courses.filter(status=Course.Status.COMPLETED).order_by('year', 'semester')
     courses_planned = all_courses.filter(status=Course.Status.PLANNED).order_by('year', 'semester')
 
-    school_list = School.objects.values_list('name', 'initials').order_by('name')
+    school_list = School.objects.values('name', 'initials').order_by('name')
 
     context = {
         'courses_in_progress': courses_in_progress,

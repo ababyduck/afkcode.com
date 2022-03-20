@@ -23,7 +23,7 @@
                 <li><a class="dropdown-item" href="{% url 'course_index' %}">Clear filter</a></li>
                 <li><hr class="dropdown-divider"></li>
                 {% for school in school_list %}
-                    <li><a class="dropdown-item" href="school={{ school.1 }}">{{ school.0 }}</a></li>
+                    <li><a class="dropdown-item" href="school={{ school.initials }}">{{ school.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
