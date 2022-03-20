@@ -6,17 +6,43 @@
 {% block nav %}{% with active_section='courses' %}{{ block.super }}{% endwith %}{% endblock %}
 
 {% block content %}
+    <div class="row sticky-top bg-light mb-3 py-2">
+        <div class="dropdown mx-0 px-2">
+            <button class="btn btn-sm btn-secondary gradient dropdown-toggle mx-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter by school
+            </button>
+            <span class="ms-3">
+                Current:
+                {% if filter_by_school %}
+                    {{ filter_by_school }}
+                {% else %}
+                    All schools
+                {% endif %}
+            </span>
+            <ul class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="{% url 'course_index' %}">Clear filter</a></li>
+                <li><hr class="dropdown-divider"></li>
+                {% for school in school_list %}
+                    <li><a class="dropdown-item" href="school={{ school.1 }}">{{ school.0 }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
     <div class="row">
-        {% if courses_in_progress %}
-            {% include '_course_index_card.html' with courses=courses_in_progress section_title='In Progress' %}
+        {% if not courses_in_progress and not courses_completed and not courses_planned %}
+            <span class="mx-1">No courses found for current filter. Try selecting another school.</span>
+        {% else %}
+            {% if courses_in_progress %}
+                {% include '_course_index_card.html' with courses=courses_in_progress section_title='In Progress' %}
+            {% endif %}
+            {% if courses_completed %}
+                {% include '_course_index_card.html' with courses=courses_completed section_title='Completed' %}
+            {% endif %}
+            {% if courses_planned %}
+                {% include '_course_index_card.html' with courses=courses_planned section_title='Planned' %}
+            {% endif %}
         {% endif %}
 
-        {% if courses_completed %}
-            {% include '_course_index_card.html' with courses=courses_completed section_title='Completed' %}
-        {% endif %}
-
-        {% if courses_planned %}
-            {% include '_course_index_card.html' with courses=courses_planned section_title='Planned' %}
-        {% endif %}
     </div>
 {% endblock content %}
