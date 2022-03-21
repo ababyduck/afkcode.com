@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}afkcode.com - Courses{% endblock title %}
+{% block title %}
+    afkcode.com - {% if filter_by_school %}{{ filter_by_school }} {% endif %}Courses
+{% endblock title %}
 
 {% block nav %}{% with active_section='courses' %}{{ block.super }}{% endwith %}{% endblock %}
 
