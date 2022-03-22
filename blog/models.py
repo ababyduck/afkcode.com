@@ -14,6 +14,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'categories'  # Django admin page will use this instead of "categorys"
+        ordering = ['name']
 
 
 class Post(models.Model):
